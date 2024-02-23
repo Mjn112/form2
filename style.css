@@ -1,0 +1,111 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: orange;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    margin-top: 2%;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid black;
+    line-height: 1.6;
+
+}
+
+.data,
+.horario {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-bottom: -30px;
+}
+
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="number"] {
+    width: 30%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.contagem,
+.contagem input[type="number"] {
+    display: flex;
+    align-items: center;
+}
+
+.contagemdiv,
+p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.distancia {
+    margin-left: 10px;
+}
+
+.butao {
+    text-align: center;
+    align-items: center;
+
+}
+
+button {
+    background-color: orange;
+    color: black;
+    font-size: 1.3em;
+    width: 0%;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: center;
+    justify-content: center;
+}
+
+button:hover {
+    background-color: #ff8c00;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}

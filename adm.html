@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exibição e Relatório do Culto</title>
+</head>
+
+<body>
+    <h1>Exibição e Relatório do Culto</h1>
+
+    <form id="filtroForm">
+        <label for="filtroDia">Filtrar por Dia:</label>
+        <input type="date" id="filtroDia" name="filtroDia"><br><br>
+
+        <label for="filtroCulto">Filtrar por Tipo de Culto:</label>
+        <select id="filtroCulto" name="filtroCulto">
+            <option value="">Selecione o Tipo de Culto</option>
+            <option value="Culto do Renovo">Culto do Renovo</option>
+            <option value="Santa Ceia">Santa Ceia</option>
+            <option value="Jaboque">Jaboque</option>
+            <option value="Culto de Homem">Culto de Homem</option>
+            <option value="Culto de Mulher">Culto de Mulher</option>
+            <option value="Culto de Jovem">Culto de Jovem</option>
+            <option value="Culto de Domingo">Culto de Domingo</option>
+            <option value="Outros">Outros</option>
+        </select><br><br>
+
+        <button type="button" onclick="gerarRelatorio()">Gerar Relatório</button>
+    </form>
+
+    <div id="resultadoRelatorio" style="display: none;">
+        <h2>Detalhes do Culto:</h2>
+        <p><strong>Data:</strong> <span id="data"></span></p>
+        <p><strong>Hora:</strong> <span id="hora"></span></p>
+        <p><strong>Tipo de Culto:</strong> <span id="tipoCulto"></span></p>
+
+        <h2>Contagem:</h2>
+        <ul>
+            <li><strong>Ministério:</strong> <span id="ministerio"></span></li>
+            <li><strong>Voluntários:</strong> <span id="voluntarios"></span></li>
+            <li><strong>Teens:</strong> <span id="teens"></span></li>
+            <li><strong>Kids:</strong> <span id="kids"></span></li>
+            <li><strong>Visitantes:</strong> <span id="visitantes"></span></li>
+            <li><strong>Membros e demais participantes:</strong> <span id="membros"></span></li>
+        </ul>
+    </div>
+
+    <script>
+        function gerarRelatorio() {
+            const filtroDia = document.getElementById('filtroDia').value;
+            const filtroCulto = document.getElementById('filtroCulto').value;
+
+            const data = sessionStorage.getItem('data');
+            const hora = sessionStorage.getItem('hora');
+            const tipoCulto = JSON.parse(sessionStorage.getItem('tipoCulto'));
+            const ministerio = sessionStorage.getItem('ministerio');
+            const voluntarios = sessionStorage.getItem('voluntarios');
+            const teens = sessionStorage.getItem('teens');
+            const kids = sessionStorage.getItem('kids');
+            const visitantes = sessionStorage.getItem('visitantes');
+            const membros = sessionStorage.getItem('membros');
+
+            const relatorioDiv = document.getElementById('resultadoRelatorio');
+
+            if ((!filtroDia || filtroDia === data) &&
+                (!filtroCulto || tipoCulto.includes(filtroCulto))) {
+                document.getElementById('data').textContent = data;
+                document.getElementById('hora').textContent = hora;
+                document.getElementById('tipoCulto').textContent = tipoCulto.join(', ');
+
+                document.getElementById('ministerio').textContent = ministerio;
+                document.getElementById('voluntarios').textContent = voluntarios;
+                document.getElementById('teens').textContent = teens;
+                document.getElementById('kids').textContent = kids;
+                document.getElementById('visitantes').textContent = visitantes;
+                document.getElementById('membros').textContent = membros;
+
+                relatorioDiv.style.display = 'block';
+            } else {
+                alert('Não há dados correspondentes aos filtros selecionados.');
+                relatorioDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

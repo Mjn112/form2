@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Coleta de Dados do Culto</title>
+</head>
+
+<header>
+    <h1>Portal âncora</h1>
+    <h2>Canaã C3 cabo</h2>
+</header>
+
+<body>
+    <div class="container">
+        <form id="cultoForm">
+            <label class="title">Culto:</label><br>
+            <input type="checkbox" id="cultoRenovo" name="tipoCulto" value="Culto do Renovo">
+            <label for="cultoRenovo">Culto do Renovo</label><br>
+
+            <input type="checkbox" id="santaCeia" name="tipoCulto" value="Santa Ceia">
+            <label for="santaCeia">Santa Ceia</label><br>
+
+            <input type="checkbox" id="jaboque" name="tipoCulto" value="Jaboque">
+            <label for="jaboque">Jaboque</label><br>
+
+            <input type="checkbox" id="cultoHomem" name="tipoCulto" value="Culto de Homem">
+            <label for="cultoHomem">Culto de Homens</label><br>
+
+            <input type="checkbox" id="cultoMulher" name="tipoCulto" value="Culto de Mulher">
+            <label for="cultoMulher">Simplemente Mulher</label><br>
+
+            <input type="checkbox" id="cultoJovem" name="tipoCulto" value="Culto de Jovem">
+            <label for="cultoJovem">Culto de Jovem - ELEVA</label><br>
+
+            <input type="checkbox" id="cultoDomingo" name="tipoCulto" value="Culto de Domingo">
+            <label for="cultoDomingo">Culto de Domingo</label><br>
+
+            <input type="checkbox" id="outros" name="tipoCulto" value="Outros">
+            <label for="outros">Outros</label><br><br>
+
+            <!-- DATA DO CULTO -->
+            <div class="data">
+                <label class="title" for="data">Data do Culto:</label>
+                <input type="date" id="data" name="data" required><br><br>
+            </div>
+            <!-- HORA DO CULTO -->
+            <div class="horario">
+                <label class="title" for="hora">Hora do Culto:</label>
+                <input type="time" id="hora" name="hora" required><br><br>
+            </div>
+            <!-- CONTAGEM -->
+            <div class="Contagem">
+                <h2>Contagem: </h2>
+                <div class="contagemdiv">
+                    <input type="number" id="ministerio" name="ministerio" placeholder="Ministério" required>
+                </div>
+                <div class="contagemdiv">
+                    <input type="number" id="voluntarios" name="voluntarios" placeholder="Voluntários" required>
+                </div>
+                <div class="contagemdiv">
+                    <input type="number" id="teens" name="teens" placeholder="Teens" required>
+                </div>
+                <div class="contagemdiv">
+                    <input type="number" id="kids" name="kids" placeholder="Kids" required>
+                </div>
+                <div class="contagemdiv">
+                    <input type="number" id="visitantes" name="visitantes" placeholder="Visitantes" required>
+                </div>
+                <div class="contagemdiv">
+                    <input type="number" id="membros" name="membros" placeholder="Membros e demais participantes"
+                        required>
+                </div>
+            </div><br>
+            <div class="butao">
+                <button type="button" onclick="enviarDados()">Confirmar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        function enviarDados() {
+            const data = document.getElementById('data').value;
+            const hora = document.getElementById('hora').value;
+
+            const tipoCultoCheckboxes = document.getElementsByName('tipoCulto');
+            const tipoCultoSelecionados = Array.from(tipoCultoCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+
+            const ministerio = document.getElementById('ministerio').value;
+            const voluntarios = document.getElementById('voluntarios').value;
+            const teens = document.getElementById('teens').value;
+            const kids = document.getElementById('kids').value;
+            const visitantes = document.getElementById('visitantes').value;
+            const membros = document.getElementById('membros').value;
+
+            sessionStorage.setItem('data', data);
+            sessionStorage.setItem('hora', hora);
+            sessionStorage.setItem('tipoCulto', JSON.stringify(tipoCultoSelecionados));
+            sessionStorage.setItem('ministerio', ministerio);
+            sessionStorage.setItem('voluntarios', voluntarios);
+            sessionStorage.setItem('teens', teens);
+            sessionStorage.setItem('kids', kids);
+            sessionStorage.setItem('visitantes', visitantes);
+            sessionStorage.setItem('membros', membros);
+
+            window.location.href = 'adm.html';
+        }
+    </script>
+</body>
+
+</html>
