@@ -27,6 +27,29 @@
             <option value="Outros">Outros</option>
         </select><br><br>
 
+        <label for="filtroAno">Filtrar por Ano:</label>
+        <select id="filtroAno" name="filtroAno">
+            <option value="">Selecione o Ano</option>
+            <!-- Opções para os anos podem ser geradas dinamicamente via JavaScript -->
+        </select><br><br>
+
+        <label for="filtroMes">Filtrar por Mês:</label>
+        <select id="filtroMes" name="filtroMes">
+            <option value="">Selecione o Mês</option>
+            <option value="01">Janeiro</option>
+            <option value="02">Fevereiro</option>
+            <option value="03">Março</option>
+            <option value="04">Abril</option>
+            <option value="05">Maio</option>
+            <option value="06">Junho</option>
+            <option value="07">Julho</option>
+            <option value="08">Agosto</option>
+            <option value="09">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+        </select><br><br>
+
         <button type="button" onclick="gerarRelatorio()">Gerar Relatório</button>
     </form>
 
@@ -43,15 +66,20 @@
             <li><strong>Teens:</strong> <span id="teens"></span></li>
             <li><strong>Kids:</strong> <span id="kids"></span></li>
             <li><strong>Visitantes:</strong> <span id="visitantes"></span></li>
-            <li><strong>Membros e demais participantes:</strong> <span id="membros"></span></li>
+            <li><strong>Membros:</strong> <span id="membros"></span></li>
+            <li><strong>Demais participantes:</strong> <span id="demaisParticipantes"></span></li>
         </ul>
     </div>
 
     <script>
+        // Função para gerar o relatório
         function gerarRelatorio() {
             const filtroDia = document.getElementById('filtroDia').value;
             const filtroCulto = document.getElementById('filtroCulto').value;
+            const filtroAno = document.getElementById('filtroAno').value;
+            const filtroMes = document.getElementById('filtroMes').value;
 
+            // Obtenção dos dados do sessionStorage
             const data = sessionStorage.getItem('data');
             const hora = sessionStorage.getItem('hora');
             const tipoCulto = JSON.parse(sessionStorage.getItem('tipoCulto'));
@@ -61,11 +89,17 @@
             const kids = sessionStorage.getItem('kids');
             const visitantes = sessionStorage.getItem('visitantes');
             const membros = sessionStorage.getItem('membros');
+            const demaisParticipantes = sessionStorage.getItem('demaisParticipantes');
 
+            // Elemento de resultado do relatório
             const relatorioDiv = document.getElementById('resultadoRelatorio');
 
+            // Lógica para filtrar os resultados
             if ((!filtroDia || filtroDia === data) &&
-                (!filtroCulto || tipoCulto.includes(filtroCulto))) {
+                (!filtroCulto || tipoCulto.includes(filtroCulto)) &&
+                (!filtroAno || filtroAno === data.substring(0, 4)) &&
+                (!filtroMes || filtroMes === data.substring(5, 7))) {
+                // Preenchimento dos detalhes do culto e da contagem
                 document.getElementById('data').textContent = data;
                 document.getElementById('hora').textContent = hora;
                 document.getElementById('tipoCulto').textContent = tipoCulto.join(', ');
@@ -76,10 +110,14 @@
                 document.getElementById('kids').textContent = kids;
                 document.getElementById('visitantes').textContent = visitantes;
                 document.getElementById('membros').textContent = membros;
+                document.getElementById('demaisParticipantes').textContent = demaisParticipantes;
 
+                // Exibição do resultado do relatório
                 relatorioDiv.style.display = 'block';
             } else {
+                // Exibição de mensagem de alerta se não houver dados correspondentes aos filtros selecionados
                 alert('Não há dados correspondentes aos filtros selecionados.');
+                // Ocultar o resultado do relatório
                 relatorioDiv.style.display = 'none';
             }
         }

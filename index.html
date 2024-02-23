@@ -70,8 +70,11 @@
                     <input type="number" id="visitantes" name="visitantes" placeholder="Visitantes" required>
                 </div>
                 <div class="contagemdiv">
-                    <input type="number" id="membros" name="membros" placeholder="Membros e demais participantes"
-                        required>
+                    <input type="number" id="membros" name="membros" placeholder="Membros" required>
+                </div>
+                <div class="contagemdiv">
+                    <input type="number" id="demaisParticipantes" name="demaisParticipantes"
+                        placeholder="Demais participantes" required>
                 </div>
             </div><br>
             <div class="butao">
@@ -97,6 +100,7 @@
             const kids = document.getElementById('kids').value;
             const visitantes = document.getElementById('visitantes').value;
             const membros = document.getElementById('membros').value;
+            const demaisParticipantes = document.getElementById('demaisParticipantes').value;
 
             sessionStorage.setItem('data', data);
             sessionStorage.setItem('hora', hora);
@@ -107,6 +111,7 @@
             sessionStorage.setItem('kids', kids);
             sessionStorage.setItem('visitantes', visitantes);
             sessionStorage.setItem('membros', membros);
+            sessionStorage.setItem('demaisParticipantes', demaisParticipantes);
 
             window.location.href = 'adm.html';
         }
